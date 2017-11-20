@@ -3,8 +3,153 @@
   <head>
     <meta charset="utf-8">
     <title>YWC15 PG60 Homework</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/51c0a66c8e.js"></script>
+    <style>
+      .btn-default {
+        background-color: #e5e5e5;
+        border: 1px solid rgba(0,0,0,.15);
+      }
+      .btn-default:hover {
+        background-color: #a5a5a5;
+        cursor: pointer;
+      }
+      .swal-button--confirm {
+        background-color: #28b9ff;
+      }
+      .swal-button--confirm:hover {
+        background-color: #7cd1f9;
+      }
+      .listto {
+        border:1px solid #000000;
+        font-size: 18px;
+      }
+      .listto:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
   </head>
   <body>
-    
+    <div class="container">
+      <div class="row" style="margin-top: 50px;">
+        <div class="col-lg-12">
+          <div class="panel panel-info">
+            <div class="panel-body">
+              <form method="get" action="javascript:search()">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="search_text" placeholder="Search..." autocomplete="off" autofocus>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                      <i class="fa fa-search fa-2x"></i>
+                    </button>
+                    <button class="btn btn-default" type="reset" onclick="showall()">
+                      Clear
+                    </button>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="result" style="margin-top: 20px;">
+        <div class="center-block text-center"><i class="fa fa-spinner fa-pulse fa-5x" aria-hidden="true"></i><br><br><strong>Loading...</strong></div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+      window.NowCata = 'programming';
+      window.getData = {};
+      $.getJSON("https://ywc15.ywc.in.th/api/interview",function(Data){
+        $.each( Data, function( key, val ) {
+          if(window.getData[val.major] == null)window.getData[val.major] = [];
+          window.getData[val.major][parseInt(val.interviewRef.substr(2,2))-1] = {firstName: val.firstName, lastName: val.lastName, interviewRef: val.interviewRef, No:parseInt(val.interviewRef.substr(2,2))};
+        });
+        console.log(window.getData);
+        $('#result').html('');
+      });
+      function modeChange(cata)
+      {
+        window.NowCata = cata;
+        showall();
+        document.getElementById('search_text').value = '';
+      }
+      function filterer(data)
+      {
+        return (data.firstName.search(SearchText) >= 0 || data.lastName.search(SearchText) >= 0 || data.interviewRef.search(SearchText) >= 0);
+      }
+      function search()
+      {
+        let text = document.getElementById('search_text').value.trim().replace(/\s+/g, " ");
+        if(text != '')
+        {
+          console.log(text);
+          let Search = text.split(' ');
+          var SearchList = [];
+          var i = 0;
+          $.each(Search, function(key,value){
+            window.SearchText = new RegExp(value,'i');
+            SearchList[i++] = window.getData[window.NowCata].filter(filterer);
+          });
+          console.log(SearchList);
+          if(SearchList.length > 0)
+          {
+            var FinalList = SearchList[0];
+            for(var j = 1 ; j < SearchList.length ; j++)FinalList = intersect_safe(FinalList,SearchList[j]);
+            console.log(FinalList);
+            if(FinalList.length > 0)
+            {
+              printList(FinalList);
+            }
+            else
+            {
+              printList(window.getData[window.NowCata]);
+            }
+          }
+        }
+      }
+      function showall()
+      {
+        printList(window.getData[window.NowCata]);
+      }
+      function intersect_safe(a, b)
+      {
+        var ai=0, bi=0;
+        var result = new Array();
+
+        while( ai < a.length && bi < b.length )
+        {
+           if      (a[ai].No < b[bi].No ){ ai++; }
+           else if (a[ai].No > b[bi].No ){ bi++; }
+           else /* they're equal */
+           {
+             result.push(a[ai]);
+             ai++;
+             bi++;
+           }
+        }
+
+        return result;
+      }
+      function printList(AllData)
+      {
+        var html = '';
+        var count = 1;
+        for (var data in AllData) {
+          if (AllData.hasOwnProperty(data)) {
+            data = AllData[data];
+            if(count%4 == 1)html += '<div class="row">';
+            html += '<div class="col listto text-center" id="' + data.interviewRef + '">' + data.interviewRef + ': ' + data.firstName + ' ' + data.lastName + '</div>';
+            if(count%4 == 0)html += '</div>';
+            count++;
+          }
+        }
+        if((count-1)%4 != 0)html += '</div>';
+        $('#result').html(html);
+      }
+    </script>
   </body>
 </html>
