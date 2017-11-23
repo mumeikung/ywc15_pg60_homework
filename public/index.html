@@ -2,10 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YWC15 PG60 Homework</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/51c0a66c8e.js"></script>
     <style>
+      body {
+        color: #ffffff;
+      }
       .btn-default {
         background-color: #e5e5e5;
         border: 0.5px solid rgba(0,0,0,.15);
@@ -21,55 +25,75 @@
         background-color: #7cd1f9;
       }
       .listto {
-        border:1px solid #000000;
+        /*border:1px solid #000000;*/
+        padding: 15px;
         font-size: 18px;
       }
       .listto:hover {
-        background-color: #f1f1f1;
+        color: #979796;
+        cursor: default;
+        font-weight: bold;
       }
       .menu {
         height: 150px;
+        background-color: transparent;
+        border: 3px solid #ffffff;
+        border-radius: 10px;
+        color: #ffffff;
+        font-weight: bold;
+      }
+      .menu:hover {
+        background-color:rgba(255,255,255,0.2) !important;
+      }
+      .active {
+        background-color:rgba(255,255,255,0.2) !important;
+      }
+      .read_it {
+        color:#66fcf1;
+        text-decoration: underline;
+      }
+      .read_ok {
+        color:#66fcf1;
       }
     </style>
   </head>
-  <body style="background-color: #000000;">
+  <body style="background-color: #434343;">
     <div class="container">
       <div class="row" style="margin-top: 20px;">
         <div class="col text-center">
           <img src="ywclogo.png" width="250" alt="YWC#15">
-          <h1>SEMI_FINAL ROUND</h1>
-          <h3>ประกาศผู้มีสิทธิ์เข้าสัมภาษณ์</h3>
-          <h4>การสัมภาษณ์จะจัดขึ้นในวันที่ 26 พฤศจิกายน 2560 ณ อาคาร ซี.พี.ทาวเวอร์ 1 (สีลม)</h4>
-          <h5>ซึ่งจะแบ่งออกเป็น 2 รอบ คือ รอบช่วงเช้าตั้งแต่เวลา 9.00 น. ถึง 12.00 น. และ รอบช่วงบ่ายตั้งแต่เวลา 13.00 น. ถึง 18.00 น.</h5>
+          <h1 style="color:#66fcf1;">SEMI_FINAL ROUND</h1>
+          <h3>ประกาศผู้มีสิทธิ์เข้าสัมภาษณ์</h3><br>
+          <h4>การสัมภาษณ์จะจัดขึ้นใน<strong class="read_it">วันที่ 26 พฤศจิกายน 2560 ณ อาคาร ซี.พี.ทาวเวอร์ 1 (สีลม)</strong></h4>
+          <h5>ซึ่งจะแบ่งออกเป็น 2 รอบ คือ <strong class="read_it">รอบช่วงเช้าตั้งแต่เวลา 9.00 น. ถึง 12.00 น.</strong> และ <strong class="read_it">รอบช่วงบ่ายตั้งแต่เวลา 13.00 น. ถึง 18.00 น.</strong></h5>
         </div>
       </div>
       <div class="row" style="margin-top: 20px;">
         <div class="col">
-          <h3>สิ่งที่ต้องเตรียมมาในวันสัมภาษณ์</h3>
+          <h3 style="color:#66fcf1;">สิ่งที่ต้องเตรียมมาในวันสัมภาษณ์</h3>
+          <p><strong class="read_ok">1.</strong> <strong class="read_it">บัตรประชาชน</strong>สำหรับการแลกบัตรเข้าอาคาร ซี.พี.ทาวเวอร์ 1 (สีลม) และ <strong class="read_it">บัตรนักศึกษา</strong>สำหรับการลงทะเบียนสัมภาษณ์ <strong>กรุณาแต่งกายด้วยชุดนักศึกษา</strong></p>
+          <p><strong class="read_ok">2.</strong> <strong class="read_it">การบ้านและสิ่งที่กรรมการสาขากำหนดไว้</strong> กรุณาอ่านรายละเอียดการบ้านและสิ่งที่กรรมการให้เตรียมมาให้ครบถ้วน<br>หากสาขาใดต้องใช้โน้ตบุ๊ค ควรชาร์ตแบตเตอรี่และเตรียมอินเทอร์เน็ตส่วนตัวมาให้พร้อม เนื่องจากสถานที่ไม่มีบริการอินเทอร์เน็ตให้ใช้</p>
+          <p><strong class="read_ok">3.</strong> <strong class="read_it">Portfolio</strong> สามารถนำมาประกอบการสัมภาษณ์ได้ สำหรับน้อง ๆ สาขาดีไซน์จะต้องนำ Portfolio มาด้วยทุกคน</p>
 
-          <p>1. บัตรประชาชนสำหรับการแลกบัตรเข้าอาคาร ซี.พี.ทาวเวอร์ 1 (สีลม) และ บัตรนักศึกษาสำหรับการลงทะเบียนสัมภาษณ์ กรุณาแต่งกายด้วยชุดนักศึกษา</p>
+          <h3 style="color:#66fcf1;">การเดินทางมาสัมภาษณ์</h3>
+          <p><strong class="read_ok">1.</strong> ด้วยรถไฟฟ้า BTS สามารถลงสถานีศาลาแดง ณ ทางออกที่ 2</p>
+          <p><strong class="read_ok">2.</strong> ด้วยรถไฟฟ้า MRT สามารถลงสถานีสีลม ณ ทางออกที่ 2 โดยเดินเรียบทางเท้าไปตามถนนสีลม</p>
+          <p><strong class="read_ok">3.</strong> ด้วยรถประจำทาง สามารถขึ้นใช้บริการสาย 15, 77, 155, 504, 177, 76</p>
 
-          <p>2. การบ้านและสิ่งที่กรรมการสาขากำหนดไว้ กรุณาอ่านรายละเอียดการบ้านและสิ่งที่กรรมการให้เตรียมมาให้ครบถ้วน หากสาขาใดต้องใช้โน้ตบุ๊ค ควรชาร์ตแบตเตอรี่และเตรียมอินเทอร์เน็ตส่วนตัวมาให้พร้อม เนื่องจากสถานที่ไม่มีบริการอินเทอร์เน็ตให้ใช้</p>
+          <h3 style="color:#66fcf1;">สอบถามเพิ่มเติมติดต่อ</h3>
+          <p><strong class="read_ok">พี่เบ๊บ:</strong> 064-174-7080</p>
+          <p><strong class="read_ok">พี่ฟง:</strong> 092-458-7067</p>
+          <p><strong class="read_ok">พี่เบนซ์:</strong> 085-666-7571</p>
 
-          <p>3. Portfolio สามารถนำมาประกอบการสัมภาษณ์ได้ สำหรับน้อง ๆ สาขาดีไซน์จะต้องนำ Portfolio มาด้วยทุกคน</p>
-
-          <h3>การเดินทางมาสัมภาษณ์</h3>
-
-          <p>1. ด้วยรถไฟฟ้า BTS สามารถลงสถานีศาลาแดง ณ ทางออกที่ 2</p>
-
-          <p>2. ด้วยรถไฟฟ้า MRT สามารถลงสถานีสีลม ณ ทางออกที่ 2 โดยเดินเรียบทางเท้าไปตามถนนสีลม</p>
-
-          <p>3. ด้วยรถประจำทาง สามารถขึ้นใช้บริการสาย 15, 77, 155, 504, 177, 76</p>
-
-          <h3>สอบถามเพิ่มเติมติดต่อ</h3>
-
-          <p>พี่เบ๊บ: 064-174-7080</p>
-
-          <p>พี่ฟง: 092-458-7067</p>
-
-          <p>พี่เบนซ์: 085-666-7571</p>
-
-          <p>หมายเหตุ: สำหรับน้อง ๆ ที่ไม่สะดวกเดินทางมาสัมภาษณ์ที่อาคาร CP Tower สีลม ให้ Inbox มาทาง<a href="https://www.facebook.com/ywcth" target="_blank">เพจเฟสบุ๊ค Young Webmaster Camp</a> ภายในวันที่ 20 พฤศจิกายน 2560</p>
+          <h6>หมายเหตุ: สำหรับน้อง ๆ ที่ไม่สะดวกเดินทางมาสัมภาษณ์ที่อาคาร CP Tower สีลม ให้ Inbox มาทาง<a href="https://www.facebook.com/ywcth" target="_blank" style="color: #00d1b2;">เพจเฟสบุ๊ค Young Webmaster Camp</a> ภายในวันที่ 20 พฤศจิกายน 2560</h6>
+        </div>
+      </div>
+      <div id="menu" style="margin-top: 20px;">
+        <div class="row">
+          <div class="col text-center"><button id="wc" class="btn btn-default btn-block menu" onClick="modeChange('content')"><p>web content</p><p><i class="fa fa-book fa-5x" aria-hidden="true"></i></p></button></div>
+          <div class="col text-center"><button id="wd" class="btn btn-default btn-block menu" onClick="modeChange('design')"><p>web design</p><p><i class="fa fa-pencil fa-5x" aria-hidden="true"></i></p></button></div>
+          <div class="col text-center"><button id="wm" class="btn btn-default btn-block menu" onClick="modeChange('marketing')"><p>web marketing</p><p><i class="fa fa-line-chart fa-5x" aria-hidden="true"></i></p></button></div>
+          <div class="col text-center"><button id="wp" class="btn btn-default btn-block menu active" onClick="modeChange('programming')"><p>web programming</p><p><i class="fa fa-terminal fa-5x" aria-hidden="true"></i></p></button></div>
         </div>
       </div>
       <div class="row" style="margin-top: 20px;">
@@ -93,24 +117,23 @@
           </div>
         </div>
       </div>
-      <div id="menu" style="margin-top: 20px;">
-        <div class="row">
-          <div class="col text-center"><button class="btn btn-default btn-block menu" onClick="modeChange('content')"><p>web content</p><p><i class="fa fa-book fa-5x" aria-hidden="true"></i></p></button></div>
-          <div class="col text-center"><button class="btn btn-default btn-block menu" onClick="modeChange('design')"><p>web design</p><p><i class="fa fa-pencil fa-5x" aria-hidden="true"></i></p></button></div>
-          <div class="col text-center"><button class="btn btn-default btn-block menu" onClick="modeChange('marketing')"><p>web marketing</p><p><i class="fa fa-line-chart fa-5x" aria-hidden="true"></i></p></button></div>
-          <div class="col text-center"><button class="btn btn-default btn-block menu" onClick="modeChange('programming')"><p>web programming</p><p><i class="fa fa-terminal fa-5x" aria-hidden="true"></i></p></button></div>
-        </div>
-      </div>
       <div id="result" style="margin-top: 20px;">
         <div class="center-block text-center"><i class="fa fa-spinner fa-pulse fa-5x" aria-hidden="true"></i><br><br><strong>Loading...</strong></div>
       </div>
-      <div id="homework" style="margin-top: 20px;">
+      <div id="homework" style="margin-top: 20px; color: #000000;">
         <div class="row">
           <div class="col card">
             <div class="card-body">
               <h4 class="card-title">การบ้านสาขา<span id="hw_sec"></span></h4>
               <p class="card-text" id="hw_text"></p>
             </div>
+          </div>
+        </div>
+      </div>
+      <div id="footer" style="margin-top: 20px; margin-bottom: 20px;">
+        <div class="row">
+          <div class="col text-center">
+            <p>Developer: PG60 Phumipak Jungpakdee for YWC#15</p>
           </div>
         </div>
       </div>
@@ -171,25 +194,30 @@
       function showall()
       {
         printList(window.getData[window.NowCata]);
+        $('.menu').removeClass("active");
         if(window.NowCata == 'content')
         {
           $('#hw_sec').html('คอนเทนท์');
           $('#hw_text').html('<p>ให้น้อง ๆ เลือกทำคอนเทนต์ใด คอนเทนต์หนึ่งจาก 2 หัวข้อด้านล่าง โดยต้องทำเป็นคอนเทนต์ออกมาจริงเท่านั้น ไม่จำกัดรูปแบบการนำเสนอ</p><p><b>หัวข้อที่ให้เลือก</b></p><p><b>1.</b> คอนเทนต์ที่ทำให้ผู้ใช้ Social เข้าใจ Cyberbullying และตระหนักถึงปัญหาที่เกิดขึ้นจาก Cyberbullying</p><p><b>2.</b> คอนเทนต์ที่ทำให้คนไทยเปลี่ยนพฤติกรรมเสพติดหน้าจอ เสพติด Social หันมาพูดคุยกัน เจอหน้ากันในชีวิตจริง ๆ มากกว่าที่เป็นอยู่</p>');
+          $('#wc').addClass('active');
         }
         else if(window.NowCata == 'design')
         {
           $('#hw_sec').html('ดีไซน์');
           $('#hw_text').html('<p>ให้ผู้ผ่านเข้ารอบสัมภาษณ์ออกแบบเว็บไซต์ของ <b>"คณะรักษาความสงบแห่งชาติ หรือ คสช."</b> เพื่อเป็นสื่อกลางในการประชาสัมพันธ์นโยบายต่าง ๆ และเป็นสื่อกลางระหว่างประชาชนกับคณะรักษาความสงบแห่งชาติ โดยให้ออกแบบในลักษณะของ One Page Design Website</p><p>** สำหรับผู้ผ่านเข้ารอบสัมภาษณ์คนใดทำ CSS มา คณะกรรมการจะพิจารณาเป็นพิเศษ</p>');
+          $('#wd').addClass('active');
         }
         else if(window.NowCata == 'marketing')
         {
           $('#hw_sec').html('มาร์เก็ตติ้ง');
           $('#hw_text').html('<p>ให้ทำแผนการตลาด (Marketing Plan) สำหรับเว็บไซต์หนึ่งเว็บไซต์ โดยเลือกเว็บไซต์ใด ๆ ก็ได้ ทั้งเว็บไซต์ของไทยและเว็บไซต์ของต่างประเทศ</p><p>นำเสนอในรูปแบบพรีเซนเทชั่น <b>ไม่เกิน 10 หน้า ภายในเวลา 5 นาที</b></p>');
+          $('#wm').addClass('active');
         }
         else if(window.NowCata == 'programming')
         {
           $('#hw_sec').html('โปรแกรมมิ่ง');
           $('#hw_text').html('<p>ให้เขียน <b>เว็บไซต์ประกาศผลผู้ผ่านเข้ารอบสัมภาษณ์ของ YWC#15</b> โดยใช้ข้อมูลจาก <a href="https://ywc15.ywc.in.th/api/interview" target="_blank">API</a> โดยมี Feature ดังนี้</p><p>• ดึงข้อมูลจาก API โดยตรง</p><p>• ให้แสดงผลแยกแต่ละสาขา</p><p>• มีระบบค้นหาชื่อผ่านกล่อง Search</p><p>• ความสามารถหรือ Feature พิเศษอื่น ๆ ที่มีความแตกต่าง และแสดงความสามารถของน้องออกมาให้ได้มากที่สุด</p><p>เมื่อทำเสร็จแล้วให้ Push Source Code ขึ้น GitHub ก่อนเวลาสัมภาษณ์</p>');
+          $('#wp').addClass('active');
         }
       }
       function intersect_safe(a, b)
