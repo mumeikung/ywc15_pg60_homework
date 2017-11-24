@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <title>YWC15 PG60 Homework</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/51c0a66c8e.js"></script>
@@ -41,11 +41,9 @@
         border-radius: 10px;
         color: #ffffff;
         font-weight: bold;
+        margin: 5px;
       }
-      .menu:hover {
-        background-color:rgba(255,255,255,0.2) !important;
-      }
-      .active {
+      .menu:hover, .active {
         background-color:rgba(255,255,255,0.2) !important;
       }
       .read_it {
@@ -90,14 +88,14 @@
       </div>
       <div id="menu" style="margin-top: 20px;">
         <div class="row">
-          <div class="col text-center"><button id="wc" class="btn btn-default btn-block menu" onClick="modeChange('content')"><p>web content</p><p><i class="fa fa-book fa-5x" aria-hidden="true"></i></p></button></div>
-          <div class="col text-center"><button id="wd" class="btn btn-default btn-block menu" onClick="modeChange('design')"><p>web design</p><p><i class="fa fa-pencil fa-5x" aria-hidden="true"></i></p></button></div>
-          <div class="col text-center"><button id="wm" class="btn btn-default btn-block menu" onClick="modeChange('marketing')"><p>web marketing</p><p><i class="fa fa-line-chart fa-5x" aria-hidden="true"></i></p></button></div>
-          <div class="col text-center"><button id="wp" class="btn btn-default btn-block menu active" onClick="modeChange('programming')"><p>web programming</p><p><i class="fa fa-terminal fa-5x" aria-hidden="true"></i></p></button></div>
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center"><button id="wc" class="btn btn-default btn-block menu" onClick="modeChange('content')"><p>web content</p><p><i class="fa fa-book fa-5x" aria-hidden="true"></i></p></button></div>
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center"><button id="wd" class="btn btn-default btn-block menu" onClick="modeChange('design')"><p>web design</p><p><i class="fa fa-pencil fa-5x" aria-hidden="true"></i></p></button></div>
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center"><button id="wm" class="btn btn-default btn-block menu" onClick="modeChange('marketing')"><p>web marketing</p><p><i class="fa fa-line-chart fa-5x" aria-hidden="true"></i></p></button></div>
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center"><button id="wp" class="btn btn-default btn-block menu active" onClick="modeChange('programming')"><p>web programming</p><p><i class="fa fa-terminal fa-5x" aria-hidden="true"></i></p></button></div>
         </div>
       </div>
       <div class="row" style="margin-top: 20px;">
-        <div class="col-lg-12">
+        <div class="col">
           <div class="panel panel-info">
             <div class="panel-body">
               <form method="get" action="javascript:search()">
@@ -133,7 +131,7 @@
       <div id="footer" style="margin-top: 20px; margin-bottom: 20px;">
         <div class="row">
           <div class="col text-center">
-            <p>Developer: PG60 Phumipak Jungpakdee for YWC#15</p>
+            <p>Developer: PG60 Phumipak Jungpakdee for YWC#15 <a href="https://github.com/mumeikung/ywc15_pg60_homework" target="_blank">GitHub</a></p>
           </div>
         </div>
       </div>
@@ -185,8 +183,24 @@
             if(FinalList.length > 0)printList(FinalList);
             else
             {
-              swal("Not Found", "ไม่พบรายชื่อที่ค้นหา", "error");
-              printList(window.getData[window.NowCata]);
+              $.each(Search, function(k,v){
+                $.each(window.getData[window.NowCata], function(key,value){
+                  var correct_f = 0;
+                  var correct_l = 0;
+                  for(var i = 0 ; i < v.length ; i++)if(v.charAt(i) == value.firstName.charAt(i))correct_f++;
+                  for(var i = 0 ; i < v.length ; i++)if(v.charAt(i) == value.lastName.charAt(i))correct_l++;
+                  if(correct_f/v.length >= 0.7)FinalList.push(value);
+                  else if(correct_l/v.length >= 0.7)FinalList.push(value);
+                });
+              });
+              if(FinalList.length > 0){
+                printList(FinalList);
+                swal("Do you mean?", "ไม่พบรายชื่อที่ค้นหา แต่คุณอาจหมายถึงรายชื่อต่อไปนี้", "warning");
+              }
+              else {
+                swal("Not Found", "ไม่พบรายชื่อที่ค้นหา", "error");
+                printList(window.getData[window.NowCata]);
+              }
             }
           }
         }
@@ -216,7 +230,7 @@
         else if(window.NowCata == 'programming')
         {
           $('#hw_sec').html('โปรแกรมมิ่ง');
-          $('#hw_text').html('<p>ให้เขียน <b>เว็บไซต์ประกาศผลผู้ผ่านเข้ารอบสัมภาษณ์ของ YWC#15</b> โดยใช้ข้อมูลจาก <a href="https://ywc15.ywc.in.th/api/interview" target="_blank">API</a> โดยมี Feature ดังนี้</p><p>• ดึงข้อมูลจาก API โดยตรง</p><p>• ให้แสดงผลแยกแต่ละสาขา</p><p>• มีระบบค้นหาชื่อผ่านกล่อง Search</p><p>• ความสามารถหรือ Feature พิเศษอื่น ๆ ที่มีความแตกต่าง และแสดงความสามารถของน้องออกมาให้ได้มากที่สุด</p><p>เมื่อทำเสร็จแล้วให้ Push Source Code ขึ้น GitHub ก่อนเวลาสัมภาษณ์</p>');
+          $('#hw_text').html('<p>ให้เขียน <b>เว็บไซต์ประกาศผลผู้ผ่านเข้ารอบสัมภาษณ์ของ YWC#15</b> โดยใช้ข้อมูลจาก <a href="https://ywc15.ywc.in.th/api/interview" target="_blank">API <i class="fa fa-external-link" aria-hidden="true"></i></a> โดยมี Feature ดังนี้</p><p>• ดึงข้อมูลจาก API โดยตรง</p><p>• ให้แสดงผลแยกแต่ละสาขา</p><p>• มีระบบค้นหาชื่อผ่านกล่อง Search</p><p>• ความสามารถหรือ Feature พิเศษอื่น ๆ ที่มีความแตกต่าง และแสดงความสามารถของน้องออกมาให้ได้มากที่สุด</p><p>เมื่อทำเสร็จแล้วให้ Push Source Code ขึ้น GitHub ก่อนเวลาสัมภาษณ์</p>');
           $('#wp').addClass('active');
         }
       }
@@ -241,20 +255,14 @@
       }
       function printList(AllData)
       {
-        var html = '';
-        var count = 1;
+        var html = '<div class="row">';
         for (var data in AllData) {
           if (AllData.hasOwnProperty(data)) {
             data = AllData[data];
-            if(count%3 == 1)html += '<div class="row">';
-            html += '<div class="col listto text-center" id="' + data.interviewRef + '">' + data.interviewRef + ': ' + data.firstName + ' ' + data.lastName + '</div>';
-            if(count%3 == 0)html += '</div>';
-            count++;
+            html += '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 listto text-center" id="' + data.interviewRef + '">' + data.interviewRef + ': ' + data.firstName + ' ' + data.lastName + '</div>';
           }
         }
-        var oldc = count-1;
-        while((count-1)%3 > 0){html += '<div class="col listto"></div>';count++;}
-        if(oldc%3 != 0)html += '</div>';
+        html += '</div>'
         $('#result').html(html);
       }
     </script>
