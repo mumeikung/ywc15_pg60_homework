@@ -187,15 +187,38 @@
                 $.each(window.getData[window.NowCata], function(key,value){
                   var correct_f = 0;
                   var correct_l = 0;
-                  for(var i = 0 ; i < v.length ; i++)if(v.charAt(i) == value.firstName.charAt(i))correct_f++;
-                  for(var i = 0 ; i < v.length ; i++)if(v.charAt(i) == value.lastName.charAt(i))correct_l++;
+                  var correct_all_f = 0;
+                  var correct_all_l = 0;
+                  var pos_l = -1;
+                  var pos_f = -1;
+                  for(var i = 0 ; i < v.length ; i++)
+                  {
+                    var pos_low = (pos_f-3 < 0 ? 0 : pos_f-3);
+                    var pos_high = (pos_f+3 >= v.length ? v.length-1 : pos_f+3);
+                    var pos = value.firstName.search(v.charAt(i));
+                    if(v.charAt(i) == value.firstName.charAt(i))correct_f++;
+                    if(pos >= 0 && (pos_f == -1 || (pos <= pos_high && pos >= pos_low)))correct_all_f++;
+                    pos_f = pos;
+                  }
+                  for(var i = 0 ; i < v.length ; i++)
+                  {
+                    var pos_low = (pos_f-3 < 0 ? 0 : pos_f-3);
+                    var pos_high = (pos_f+3 >= v.length ? v.length-1 : pos_f+3);
+                    var pos = value.lastName.search(v.charAt(i));
+                    if(v.charAt(i) == value.lastName.charAt(i))correct_l++;
+                    if(pos >= 0 && (pos_l == -1 || (pos <= pos_high && pos >= pos_low)))correct_all_l++;
+                    pos_l = pos;
+                  }
                   if(correct_f/v.length >= 0.7)FinalList.push(value);
                   else if(correct_l/v.length >= 0.7)FinalList.push(value);
+                  else if(correct_all_f/v.length >= 0.8)FinalList.push(value);
+                  else if(correct_all_l/v.length >= 0.8)FinalList.push(value);
+                  console.log(value.interviewRef, value.firstName, value.lastName, correct_f/v.length, correct_l/v.length, correct_all_f/v.length, correct_all_l/v.length);
                 });
               });
               if(FinalList.length > 0){
                 printList(FinalList);
-                swal("Do you mean?", "ไม่พบรายชื่อที่ค้นหา แต่คุณอาจหมายถึงรายชื่อต่อไปนี้", "warning");
+                swal("Do you mean", "ไม่พบรายชื่อที่ค้นหา แต่คุณอาจหมายถึงรายชื่อต่อไปนี้", "warning");
               }
               else {
                 swal("Not Found", "ไม่พบรายชื่อที่ค้นหา", "error");
@@ -234,6 +257,18 @@
           $('#wp').addClass('active');
         }
       }
+      function printList(AllData)
+      {
+        var html = '<div class="row">';
+        for (var data in AllData) {
+          if (AllData.hasOwnProperty(data)) {
+            data = AllData[data];
+            html += '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 listto text-center" id="' + data.interviewRef + '">' + data.interviewRef + ': ' + data.firstName + ' ' + data.lastName + '</div>';
+          }
+        }
+        html += '</div>'
+        $('#result').html(html);
+      }
       function intersect_safe(a, b)
       {
         var ai=0, bi=0;
@@ -252,18 +287,6 @@
         }
 
         return result;
-      }
-      function printList(AllData)
-      {
-        var html = '<div class="row">';
-        for (var data in AllData) {
-          if (AllData.hasOwnProperty(data)) {
-            data = AllData[data];
-            html += '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 listto text-center" id="' + data.interviewRef + '">' + data.interviewRef + ': ' + data.firstName + ' ' + data.lastName + '</div>';
-          }
-        }
-        html += '</div>'
-        $('#result').html(html);
       }
     </script>
   </body>

@@ -1,2 +1,2 @@
-# ywc15_pg60_homework
-YWC15 PG60 Homework
+# YWC15 PG60 Homework
+Website is in "public" Folder
