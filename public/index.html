@@ -189,6 +189,7 @@
             if(FinalList.length > 0)printList(FinalList);
             else
             {
+              let leng_diff = 2;
               $.each(Search, function(k,v){
                 $.each(window.getData[window.NowCata], function(key,value){
                   var correct_f = 0;
@@ -197,20 +198,21 @@
                   var correct_all_l = 0;
                   var pos_l = -1;
                   var pos_f = -1;
+                  var pos_low = -1;
+                  var pos_high = -1;
+                  var pos = -1;
                   for(var i = 0 ; i < v.length ; i++)
                   {
-                    var pos_low = (pos_f-3 < 0 ? 0 : pos_f-3);
-                    var pos_high = (pos_f+3 >= v.length ? v.length-1 : pos_f+3);
-                    var pos = value.firstName.search(v.charAt(i));
+                    pos_low = (pos_f-leng_diff < 0 ? 0 : pos_f-leng_diff);
+                    pos_high = (pos_f+leng_diff >= value.firstName ? value.firstName-1 : pos_f+leng_diff);
+                    pos = value.firstName.search(v.charAt(i));
                     if(v.charAt(i) == value.firstName.charAt(i))correct_f++;
                     if(pos >= 0 && (pos_f == -1 || (pos <= pos_high && pos >= pos_low)))correct_all_f++;
                     pos_f = pos;
-                  }
-                  for(var i = 0 ; i < v.length ; i++)
-                  {
-                    var pos_low = (pos_f-3 < 0 ? 0 : pos_f-3);
-                    var pos_high = (pos_f+3 >= v.length ? v.length-1 : pos_f+3);
-                    var pos = value.lastName.search(v.charAt(i));
+
+                    pos_low = (pos_l-leng_diff < 0 ? 0 : pos_l-leng_diff);
+                    pos_high = (pos_l+leng_diff >= value.lastName.length ? value.lastName.length-1 : pos_l+leng_diff);
+                    pos = value.lastName.search(v.charAt(i));
                     if(v.charAt(i) == value.lastName.charAt(i))correct_l++;
                     if(pos >= 0 && (pos_l == -1 || (pos <= pos_high && pos >= pos_low)))correct_all_l++;
                     pos_l = pos;
